@@ -20,18 +20,13 @@ Function.prototype.myBind = function() {
  
  }
 
- Function.prototype.myBind = function() {
+ Function.prototype.myBind2 = function(...boundArgs) {
     let that = this;
-    const boundArgs = Array.from(arguments);
     const context = boundArgs.shift()
 
-    return function () {
-        let callArgs = Array.from(arguments);
+    return function (...callArgs) {
         return that.apply(context,boundArgs.concat(callArgs))
     }
-
-  
- 
  }
 
  class Cat {
@@ -55,5 +50,8 @@ Function.prototype.myBind = function() {
   const pavlov = new Dog("Pavlov");
   const alex = new Dog("Alex")
   
-  boundedSays = markov.says.myBind(pavlov,"bark","alex")
-  alexSays = markov.says.myBind(alex,"hello")
+  // boundedSays = markov.says.myBind(pavlov,"bark","alex")
+  // alexSays = markov.says.myBind(alex,"hello")
+
+  boundedSays2 = markov.says.myBind2(pavlov,"bark","alex")
+  alexSays2 = markov.says.myBind2(alex,"hello")
