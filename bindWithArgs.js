@@ -6,15 +6,31 @@ Function.prototype.myBind = function(context) {
 
 }
 */
-Function.prototype.myBind = function(arguments) {
+Function.prototype.myBind = function() {
     let that = this;
     const boundArgs = Array.from(arguments);
-   const context = boundArgs.shift()
-//    debugger 
-    return function () {return that.apply(context,boundArgs)}
+    const context = boundArgs.shift()
 
+    return function () {
+        let callArgs = Array.from(arguments);
+        return that.apply(context,boundArgs.concat(callArgs))
+    }
 
-   // return (arg1,arg2,arg3....)
+  
+ 
+ }
+
+ Function.prototype.myBind = function() {
+    let that = this;
+    const boundArgs = Array.from(arguments);
+    const context = boundArgs.shift()
+
+    return function () {
+        let callArgs = Array.from(arguments);
+        return that.apply(context,boundArgs.concat(callArgs))
+    }
+
+  
  
  }
 
@@ -40,4 +56,4 @@ Function.prototype.myBind = function(arguments) {
   const alex = new Dog("Alex")
   
   boundedSays = markov.says.myBind(pavlov,"bark","alex")
-  alexSays = markov.says.myBind(alex)
+  alexSays = markov.says.myBind(alex,"hello")
